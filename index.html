@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>calculator-app</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- REACT -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+
+    <!-- REACT FOR WEB -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- BABEL -->
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+
+    <script type="text/babel">
+      const root = document.getElementById("root");
+
+      function CalculatorApp() {
+        const [Num1, setNum1] = React.useState(0);
+        const [Num2, setNum2] = React.useState(0);
+        const [Operator, setOperator] = React.useState("plus");
+        const [Results, setResults] = React.useState(0);
+
+        function onChangeNum1(event) {
+          setNum1(parseInt(event.target.value));
+        }
+        function onChangeNum2(event) {
+          setNum2(parseInt(event.target.value));
+        }
+        function HandleChangeOperator(event) {
+          setOperator(event.target.value);
+        }
+
+        function OnClickCalc() {
+          let result;
+          switch (Operator) {
+            case "Plus":
+              result = Num1 + Num2;
+              break;
+            case "Minus":
+              result = Num1 - Num2;
+              break;
+            case "Kali":
+              result = Num1 * Num2;
+              break;
+            case "Bagi":
+              result = Num1 / Num2;
+              break;
+            default:
+              result = 0;
+          }
+          setResults(result);
+        }
+
+        return (
+          <>
+            <input
+              type="number"
+              placeholder="angka1"
+              value={Num1}
+              onChange={onChangeNum1}
+            />
+
+            <select value={Operator} onChange={HandleChangeOperator}>
+              <option value="Plus">+</option>
+              <option value="Minus">-</option>
+              <option value="Kali">x</option>
+              <option value="Bagi">:</option>
+            </select>
+
+            <input
+              type="number"
+              placeholder="angka2"
+              value={Num2}
+              onChange={onChangeNum2}
+            />
+            <button onClick={OnClickCalc}>Calc</button>
+            <p>hasil : {Results}</p>
+          </>
+        );
+      }
+
+      function App() {
+        return <CalculatorApp />;
+      }
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
